@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        font-size: 1.3em;
+        font-style: italic;
+        margin: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="quote">Loading daily quote...</div>
+    <script>
+      fetch("https://zenquotes.io/api/today")
+        .then(response => response.json())
+        .then(data => {
+          const quote = `"${data[0].q}" — ${data[0].a}`;
+          document.getElementById("quote").innerText = quote;
+        })
+        .catch(() => {
+          document.getElementById("quote").innerText = "Unable to load quote today.";
+        });
+    </script>
+  </body>
+</html>
